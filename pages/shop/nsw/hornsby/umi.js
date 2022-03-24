@@ -15,15 +15,15 @@ export default function umi({ menuGroup, menuItem }) {
 
 <ul>
       {menuGroup.map(({ name }) => (
-        <li><h2>{name}</h2></li>
+        <li key={name}><h2>{name}</h2></li>
       ))}
 </ul>
 
       {menuItem.map((item,index) => (
         <>
-          <h2>{item.properties.name.title[0].plain_text} <i>${item.properties.price.number}</i> </h2>
+          <h2 key={index}>{item.properties.name.title[0].plain_text} <i>${item.properties.price.number}</i> </h2>
           
-          <Image src={item.properties.image.files[0].file.url} width={300} height={300} />
+          <Image src={item.properties.image.files[0].file.url} width={300} height={300} alt='menu image' />
         </>
       ))}
 
@@ -35,8 +35,8 @@ export default function umi({ menuGroup, menuItem }) {
 
 
       <h2>
-        <Link href="/">
-          <a>Back to home</a>
+        <Link href="/" passHref>
+          <p>Back to home</p>
         </Link>
       </h2>
     </Layout>

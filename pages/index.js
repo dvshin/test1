@@ -2,13 +2,14 @@ import Head from 'next/head'
 
 import styles from '../styles/Home.module.css'
 import Layout from '../components/layout'
+import Link from 'next/link'
 
-export default function Home({mainpageShopList}) {
+export default function Home({ mainpageShopList }) {
   return (
 
     <Layout>
       <h1 className={styles.title}>
-        <a href="https://posnet.com.au">POSNET PTY LTD</a>
+        <Link href="https://posnet.com.au" passHref>POSNET PTY LTD</Link>
       </h1>
 
       <p className={styles.description}>
@@ -16,24 +17,28 @@ export default function Home({mainpageShopList}) {
       </p>
 
       <div className={styles.grid}>
-        <a href="/shop/nsw/hornsby/umi" className={styles.card}>
-          <h2>Umi Sushi &rarr;</h2>
-          <p>Sushi Umi order page</p>
-        </a>
-
-        <a href="/shop/nsw/hornsby/herosushi" className={styles.card}>
-          <h2>Hero Sushi &rarr;</h2>
-          <p>go to hero sushi order page</p>
-        </a>
-        {mainpageShopList.map(({ link, name }) => (
-          <a href={link} className={styles.card}>
+        
+        
+      {mainpageShopList.map(({link,name}) =>
+      (<div key={link+name} className={styles.card}>
+          <a href={link}  passHref>
             <h2>{name} &rarr;</h2>
-            <p>go to {name} order page</p>
+            <p>{name} order page</p>
           </a>
-        ))}
+        </div>)
+      )}
+        
+        
+
+        {/* <div className={styles.card}>
+          <a href="/shop/nsw/hornsby/herosushi"  passHref>
+            <h2>Hero Sushi &rarr;</h2>
+            <p>go to hero sushi order page</p>
+          </a>
+        </div> */}
       </div>
     </Layout>
-    )
+  )
 }
 
 // export async function getServerSideProps(context) {
@@ -53,35 +58,20 @@ export async function getStaticProps() {
   }
 }
 
-export async function getSortedPostsData() {
-  const res = await fetch('..')
-  return res.json()
-}
+// export async function getSortedPostsData() {
+//   const res = await fetch('..')
+//   return res.json()
+// }
 
 export function getmainShopList() {
   return [
     {
       link: "/shop/nsw/hornsby/umi",
-      name: "Umi Sushi"
+      name: "Umi Sush"
     },
     {
-      link: "/shop/nsw/hornsby/umi",
-      name: "Umi Sushi1"
-    },
-    {
-      link: "/shop/nsw/hornsby/umi",
-      name: "Umi Sushi2"
-    }, {
-      link: "/shop/nsw/hornsby/umi",
-      name: "Umi Sushi3"
-    },
-    {
-      link: "/shop/nsw/hornsby/umi",
-      name: "Umi Sushi4"
-    },
-    {
-      link: "/shop/nsw/hornsby/umi",
-      name: "Umi Sushi5"
+      link: "/shop/nsw/hornsby/herosushi",
+      name: "hero sushi"
     }
   ]
 }
